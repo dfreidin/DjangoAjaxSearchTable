@@ -17,6 +17,7 @@ def search(request):
     ln = request.GET.get("last_name", "")
     fd = request.GET.get("from", "")
     td = request.GET.get("to", "")
+    pp = int(request.GET.get("per_page", 10))
     pn = int(request.GET.get("page", 1)) - 1
     sort = request.GET.get("sort", "first_name")
     leads = Lead.objects.filter(first_name__contains=fn, last_name__contains=ln)
@@ -26,11 +27,11 @@ def search(request):
         td = datetime.strptime(td, "%Y-%m-%d") + timedelta(days=1)
         leads = leads.filter(created_at__lte=td)
     leads = leads.order_by(sort)
-    if pn*10+9 > len(leads):
-        page = leads[pn*10:]
+    if pn*pp+pp-1 > len(leads):
+        page = leads[pn*pp:]
     else:
-        page = leads[pn*10:(pn+1)*10]
-    num_pages = max(int(ceil(len(leads)/10.0)), 1)
+        page = leads[pn*pp:(pn+1)*pp]
+    num_pages = max(int(ceil(len(leads)/float(pp))), 1)
     table = render(request, "leads_pages/table.html", {"leads": page})
     page_list = render(request, "leads_pages/page_list.html", {"range": range(1, num_pages+1)})
     response = {"num_pages": num_pages, "pn": pn+1, "table": table.content, "page_list": page_list.content}
