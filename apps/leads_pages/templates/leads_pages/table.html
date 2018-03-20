@@ -1,0 +1,9 @@
+{% for x in leads %}
+    <tr>
+        <td>{{x.id}}</td>
+        <td>{{x.first_name}}</td>
+        <td>{{x.last_name}}</td>
+        <td>{{x.created_at}}</td>
+        <td>{{x.email}}</td>
+    </tr>
+{% endfor %}

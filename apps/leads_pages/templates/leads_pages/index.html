@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Leads Ajax example</title>
+        <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+        {% load static %}
+        <script src='{% static "leads_pages/js/scripts.js" %}'></script>
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous'>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <form id="search_form" class="form-inline" action="search" method="GET">
+                    <label for="first_name">First Name:</label>
+                    <input type="text" name="first_name" id="first_name">
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" name="last_name" id="last_name">
+                    <label for="from">From:</label>
+                    <input type="date" name="from" id="from">
+                    <label for="to">To:</label>
+                    <input type="date" name="to" id="to">
+                    <label for="sort">Sort By:</label>
+                    <select name="sort" id="sort">
+                        <option value="first_name">First Name</option>
+                        <option value="last_name">Last Name</option>
+                        <option value="email">Email</option>
+                        <option value="created_at">Registered Date</option>
+                    </select>
+                </form>
+            </div>
+            <div class="row">
+                <ul id="pages" class="pagination"></ul>
+            </div>
+            <div class="row">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>leads_id</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Registered Datetime</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
